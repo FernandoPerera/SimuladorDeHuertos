@@ -14,6 +14,28 @@ public class Orchard {
 
         return vegetablesAvaliables;
     }
-    
+
+    synchronized public void addVegetable(String farmerName, String vegetable) throws InterruptedException {
+
+        while ( this.vegetablesAvaliables.size() >= this.marketCapacity ) {
+            wait();
+        }
+        this.vegetablesAvaliables.add(vegetable);
+        System.out.println(farmerName + " ha producido : " + vegetable);
+        notifyAll();
+
+    }
+
+    synchronized public String consumeVegetable(String clientName) throws InterruptedException {
+
+        while ( vegetablesAvaliables.size() == 0 ){
+            wait();
+        }
+
+        String vegetableToConsume = this.vegetablesAvaliables.remove(0);
+        notifyAll();
+
+        return vegetableToConsume;
+    }
 
 }

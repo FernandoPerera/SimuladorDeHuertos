@@ -14,4 +14,20 @@ public class Client extends Thread {
         this.CONSUMING_TIME = CONSUMING_TIME * 1000;
     }
 
+    public void run() {
+
+        for (int i = 0; i < this.maxToConsume; i++) {
+
+            try {
+                String vegetableToConsume =  this.orchard.consumeVegetable(this.clientName);
+                Thread.sleep(this.CONSUMING_TIME);
+                System.out.println(this.clientName + " ha consumido : " + vegetableToConsume);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+
+    }
+
 }

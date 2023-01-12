@@ -6,7 +6,7 @@ public class Farmer extends Thread {
     private int farmerProduction;
     private int maxVegetableProduced = 0;
 
-    private Orchard orchart;
+    private Orchard orchard;
 
     private final String [] VEGETABLES = {
             "lettuce",
@@ -31,7 +31,37 @@ public class Farmer extends Thread {
         this.maxVegetableProduced = maxVegetableProduced;
         this.farmerProduction = farmerProduction;
         this.maxGrowthTime = maxGrowthTime;
-        this.orchart = orchart;
+        this.orchard = orchard;
+    }
+
+    private String getVegetable() {
+        return VEGETABLES[getRandomInt(VEGETABLES.length)];
+    }
+
+    private int getRandomGrowthTime() {
+        return  (int) (Math.random() * ( this.maxGrowthTime - 1 ) + 1);
+    }
+
+    private int getRandomInt(int limitNumber){ return (int) Math.round((Math.random() * limitNumber)); }
+
+    public void run() {
+
+        System.out.println("\t *****************************************************");
+        System.out.println("\t | Comenzando proceso de almacenamiento de vegetales |");
+        System.out.println("\t *****************************************************\n");
+
+        for (int i = 0; i < this.maxVegetableProduced; i++) {
+            String vegetableProduced = this.getVegetable();
+
+            try {
+                Thread.sleep(this.getRandomGrowthTime() * 1000);
+                this.orchard.addVegetable(this.name, vegetableProduced);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+
     }
 
 }
