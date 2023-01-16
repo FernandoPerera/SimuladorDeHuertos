@@ -3,7 +3,7 @@ public class Main {
 
         Orchard huerto = new Orchard(10);
 
-        Farmer nando = new Farmer("Fernando", 5, 4, huerto);
+        Farmer nando = new Farmer("Fernando", 5, 2, huerto);
 
         Client cliente = new Client("Adrian", 5,4,huerto);
 
