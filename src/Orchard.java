@@ -26,16 +26,16 @@ public class Orchard {
 
     }
 
-    synchronized public String consumeVegetable(String clientName) throws InterruptedException {
+    synchronized public void consumeVegetable(String clientName) throws InterruptedException {
 
         while ( vegetablesAvaliables.size() == 0 ){
             wait();
         }
 
         String vegetableToConsume = this.vegetablesAvaliables.remove(0);
+        System.out.println(clientName + " ha consumido : " + vegetableToConsume);
         notifyAll();
 
-        return vegetableToConsume;
     }
 
 }
