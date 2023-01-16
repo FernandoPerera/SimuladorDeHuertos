@@ -5,8 +5,9 @@ public class Main {
 
         Farmer nando = new Farmer("Fernando", 5, 2, huerto);
 
-        Client cliente = new Client("Adrian", 5,4,huerto);
+        Client cliente = new Client("Adrian", 5,2,huerto);
 
+        nando.setPriority(10);
         nando.start();
         cliente.start();
 
